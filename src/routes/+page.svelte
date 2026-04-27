@@ -75,7 +75,6 @@
 		</section>
 
 		<section class="section section-top pt-0!" id="info">
-			<h2 class="section-title mb-0!">info</h2>
 			<EligibilityChecker />
 			<div class="info-grid">
 				<div class="info-card">
@@ -308,7 +307,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 3rem;
 		align-items: center;
-		padding: 5rem 0 4rem;
+		padding: 1.5rem 0 1rem;
 	}
 	@media (max-width: 640px) {
 		.hero {
