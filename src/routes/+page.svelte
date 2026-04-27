@@ -4,6 +4,7 @@
 	import thumb2758159128 from '$lib/assets/thumbnails/thumb2758159128.jpg';
 	import thumb2758159130 from '$lib/assets/thumbnails/thumb2758159130.jpg';
 	import thumb2758159129 from '$lib/assets/thumbnails/thumb2758159129.jpg';
+	import diaPick from '$lib/assets/dia_pick.png';
 
 	interface CreditPerson {
 		name: string;
@@ -29,7 +30,7 @@
 		{
 			role: 'commentators',
 			people: [
-				{ name: 'cylan', uuid: '06935965-1d4a-42da-b6d2-6915b4583367' },
+				{ name: 'cylan', note: 'stream manager', uuid: '06935965-1d4a-42da-b6d2-6915b4583367' },
 				{ name: 'sarah', uuid: 'f7e27b19-2add-45da-a24c-1e12d1d334de' },
 				{ name: 'julie', uuid: 'aca29442-2ad9-4b50-9aef-a1f23d8b51eb' },
 				{ name: 'skye', uuid: '2481d626-8479-48c1-aad7-41c0f380143d' }
@@ -88,6 +89,73 @@
 		matchId: number | null;
 	}
 
+	let ignInput = '';
+	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
+	let eligibilityMessage = '';
+	let seasonalFf: number | null = null;
+
+	async function checkEligibility() {
+		const ign = ignInput.trim();
+		if (!ign) return;
+		eligibilityState = 'loading';
+		seasonalFf = null;
+		try {
+			const resp = await fetch(`https://api.mcsrranked.com/users/${encodeURIComponent(ign)}`);
+			if (!resp.ok) {
+				eligibilityState = 'error';
+				eligibilityMessage = `could not find player "${ign}"`;
+				return;
+			}
+			const data = await resp.json();
+			const stats = data.data.statistics;
+			const ff = (stats.season.forfeits.ranked / stats.season.playedMatches.ranked) * 100;
+			seasonalFf = ff;
+			if (ff <= 15) {
+				eligibilityState = 'eligible';
+			} else {
+				eligibilityState = 'ineligible';
+			}
+		} catch {
+			eligibilityState = 'error';
+			eligibilityMessage = 'something went wrong, try again';
+		}
+	}
+
+	const prizes = [
+		{
+			place: '1st',
+			name: 'junesies',
+			uuid: '2125698b-0d79-4c4c-9969-8e39430e65fc',
+			desc: '6 months',
+			value: 54,
+			soup: true
+		},
+		{
+			place: '2nd',
+			name: '_MonkeyBoy_',
+			uuid: '0234262f-0ae0-4d6a-8f09-22f30fb5ce9e',
+			desc: '4 months',
+			value: 36,
+			soup: true
+		},
+		{
+			place: '3rd',
+			name: 'GooseGoose27',
+			uuid: '4d93a367-a51a-461f-a01f-e62ff7ed4cb2',
+			desc: '3 months',
+			value: 27,
+			soup: true
+		},
+		{
+			place: '4th',
+			name: 'AizuisMarshy',
+			uuid: '22efa802-7c89-4657-a9fe-ad525f01c630',
+			desc: '$18 USD Paypal',
+			value: 18,
+			soup: false
+		}
+	];
+
 	const groupStageVods: Vod[] = [
 		{ twitchVideoId: null, thumbnailUrl: null, gameNumber: 1, matchId: 9350856 },
 		{ twitchVideoId: 2758159131, thumbnailUrl: thumb2758159131, gameNumber: 2, matchId: 9351763 },
@@ -130,8 +198,56 @@
 			</div>
 		</section>
 
-		<section class="section" id="info">
+		<section class="section section-top !pt-0" id="info">
 			<h2 class="section-title">info</h2>
+			<div class="eligibility-panel">
+				<div class="eligibility-left">
+					<p class="eligibility-sign">check<br />eligibility</p>
+					<form class="eligibility-form" on:submit|preventDefault={checkEligibility}>
+						<input
+							class="ign-input"
+							type="text"
+							placeholder="your IGN..."
+							bind:value={ignInput}
+							autocomplete="off"
+							spellcheck="false"
+						/>
+						<button class="ign-btn" type="submit" disabled={eligibilityState === 'loading'}>
+							{eligibilityState === 'loading' ? '...' : 'check'}
+						</button>
+					</form>
+				</div>
+				<div class="eligibility-divider"></div>
+				<div class="eligibility-right">
+					{#if eligibilityState === 'idle'}
+						<span class="eligibility-idle">—</span>
+					{:else if eligibilityState === 'loading'}
+						<span class="eligibility-idle">...</span>
+					{:else if ignInput.toLowerCase() === 'submissivecatgir'}
+						<p class="eligibility-verdict eligibility-verdict--yes">for sure twin</p>
+						<span class="eligibility-ff">-55% ff rate this season</span>
+						<span class="eligibility-note">what did you think was gonna happen?</span>
+					{:else if eligibilityState === 'eligible'}
+						{#if seasonalFf === 0}
+							<p class="eligibility-verdict eligibility-verdict--yes eligibility-verdict--top">
+								W MENTALL
+							</p>
+						{:else}
+							<p class="eligibility-verdict eligibility-verdict--yes">you're eligible!</p>
+						{/if}
+						<span class="eligibility-ff">{seasonalFf?.toFixed(2)}% ff rate this season</span>
+					{:else if eligibilityState === 'ineligible'}
+						<p class="eligibility-verdict eligibility-verdict--no">not eligible for NPI.</p>
+						<span class="eligibility-ff">{seasonalFf?.toFixed(2)}% ff rate this season</span>
+					{:else if eligibilityState === 'error'}
+						<p class="eligibility-verdict eligibility-verdict--error">{eligibilityMessage}</p>
+					{/if}
+				</div>
+			</div>
+			<div class="requirements">
+				<span class="requirements-label">requirement</span>
+				less than 15% forfeit rate in the current season
+			</div>
 			<div class="info-grid">
 				<div class="info-card">
 					<span class="info-label">format</span>
@@ -155,45 +271,13 @@
 			</div>
 		</section>
 
-		<section class="section" id="vods">
-			<h2 class="section-title">group stage vods</h2>
-			<div class="vod-grid">
-				{#each groupStageVods as vod (vod.gameNumber)}
-					<div class="vod-card">
-						{#if vod.twitchVideoId !== null}
-							<a
-								class="vod-thumb"
-								href="https://www.twitch.tv/videos/{vod.twitchVideoId}"
-								target="_blank"
-								rel="external noopener"
-								style={vod.thumbnailUrl ? `background-image: url('${vod.thumbnailUrl}')` : ''}
-							>
-								<span class="play-icon">▶</span>
-							</a>
-						{:else}
-							<div class="vod-thumb vod-thumb--unavailable">
-								<span class="play-icon">▶</span>
-							</div>
-						{/if}
-						<div class="vod-meta">
-							<span class="vod-title">Seed #{vod.gameNumber}</span>
-							{#if vod.matchId !== null}
-								<a
-									class="vod-timeline"
-									href="https://mcsrranked.com/stats/lesbianpatty/{vod.matchId}?matches=private&sort=newest"
-									target="_blank"
-									rel="external noopener">timeline →</a
-								>
-							{:else}
-								<span class="vod-timeline--unavailable">timeline unavailable</span>
-							{/if}
-						</div>
-					</div>
-				{/each}
-			</div>
-		</section>
+		<div class="npi1-divider">
+			<div class="npi1-divider-line"></div>
+			<span class="npi1-divider-label">no<span class="pct">%</span> invitational 1</span>
+			<div class="npi1-divider-line"></div>
+		</div>
 
-		<section class="section" id="winners">
+		<section class="section section-top" id="winners">
 			<h2 class="section-title" style="text-align: center">results</h2>
 			<div class="final-card">
 				<div class="final-player final-player--winner">
@@ -246,6 +330,96 @@
 							rel="external noopener">_MonkeyBoy_</a
 						>
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="vods">
+			<h2 class="section-title">group stage vods</h2>
+			<div class="vod-grid">
+				{#each groupStageVods as vod (vod.gameNumber)}
+					<div class="vod-card">
+						{#if vod.twitchVideoId !== null}
+							<a
+								class="vod-thumb"
+								href="https://www.twitch.tv/videos/{vod.twitchVideoId}"
+								target="_blank"
+								rel="external noopener"
+								style={vod.thumbnailUrl ? `background-image: url('${vod.thumbnailUrl}')` : ''}
+							>
+								<span class="play-icon">▶</span>
+							</a>
+						{:else}
+							<div class="vod-thumb vod-thumb--unavailable">
+								<span class="play-icon">▶</span>
+							</div>
+						{/if}
+						<div class="vod-meta">
+							<span class="vod-title">seed #{vod.gameNumber}</span>
+							{#if vod.matchId !== null}
+								<a
+									class="vod-timeline"
+									href="https://mcsrranked.com/stats/lesbianpatty/{vod.matchId}?matches=private&sort=newest"
+									target="_blank"
+									rel="external noopener">timeline →</a
+								>
+							{:else}
+								<span class="vod-timeline--unavailable">timeline unavailable</span>
+							{/if}
+						</div>
+					</div>
+				{/each}
+			</div>
+		</section>
+
+		<section class="section" id="prize-pool">
+			<h2 class="section-title">prize pool</h2>
+			<div class="prize-list">
+				{#each prizes as entry}
+					<div
+						class="prize-row prize-row--{entry.place
+							.replace('th', '')
+							.replace('rd', '')
+							.replace('nd', '')
+							.replace('st', '')}"
+					>
+						<span class="prize-place">{entry.place}</span>
+						<a
+							class="prize-player"
+							href="https://mcsrranked.com/stats/{entry.uuid}"
+							target="_blank"
+							rel="external noopener"
+						>
+							<img
+								class="prize-avatar"
+								src="https://nmsr.nickac.dev/face/{entry.uuid}"
+								alt={entry.name}
+							/>
+							<span class="prize-name">{entry.name}</span>
+						</a>
+						<span class="prize-desc">
+							{entry.desc}{#if entry.soup}&nbsp;<img
+									class="prize-pick"
+									src={diaPick}
+									alt="Diamond Pickaxe supporter"
+								/>{/if}
+						</span>
+						<span class="prize-value">${entry.value} USD</span>
+					</div>
+				{/each}
+				<div class="prize-row prize-row--raffle">
+					<span class="prize-place prize-place--raffle">raffle</span>
+					<div class="prize-player prize-player--plain">
+						<span class="prize-name prize-name--muted">TBD</span>
+					</div>
+					<span class="prize-desc"
+						>1 month&nbsp;<img
+							class="prize-pick"
+							src={diaPick}
+							alt="Diamond Pickaxe supporter"
+						/></span
+					>
+					<span class="prize-value">$9 USD</span>
 				</div>
 			</div>
 		</section>
@@ -349,7 +523,10 @@
 
 	<footer>
 		<span>no% invitational</span>
-		<span class="footer-muted">tournament & website made with love &hearts;</span>
+		<span class="footer-muted"
+			>tournament & website made with love <span style="color: var(--color-accent);">&hearts;</span
+			></span
+		>
 		<div class="footer-gh-wrap">
 			<span class="footer-commit">{__COMMIT_HASH__}</span>
 			<a
@@ -481,10 +658,38 @@
 	.embed-placeholder span { font-size: 0.75rem; }
     */
 
+	.npi1-divider {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 2rem 1.5rem 0;
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+	}
+	.npi1-divider-line {
+		flex: 1;
+		height: 1px;
+		background: var(--color-accent);
+	}
+	.npi1-divider-label {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--color-text);
+		white-space: nowrap;
+	}
+	.npi1-divider-label .pct {
+		color: var(--color-accent);
+	}
+
 	.section {
 		padding: 3rem 0;
 		border-top: 1px solid var(--color-border);
 		scroll-margin-top: 4rem;
+	}
+	.section-top {
+		border-top: 0;
 	}
 	.section-title {
 		font-size: 0.75rem;
@@ -492,6 +697,247 @@
 		letter-spacing: 0.12em;
 		color: var(--color-accent);
 		margin: 0 0 1.5rem;
+	}
+
+	.eligibility-panel {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		margin-bottom: 0.75rem;
+		overflow: hidden;
+	}
+	.eligibility-left {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1.25rem;
+		padding-left: 0;
+	}
+	.eligibility-sign {
+		margin: 0;
+		font-size: 1.6rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		color: var(--color-accent);
+		text-transform: lowercase;
+	}
+	.eligibility-form {
+		display: flex;
+		gap: 0.5rem;
+	}
+	.ign-input {
+		flex: 1;
+		min-width: 0;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		padding: 0.5rem 0.75rem;
+		font-size: 0.9rem;
+		color: var(--color-text);
+		font-family: inherit;
+		outline: none;
+		transition: border-color 0.15s;
+	}
+	.ign-input:focus {
+		border-color: var(--color-accent);
+	}
+	.ign-btn {
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+		border: 1px solid var(--color-accent);
+		border-radius: 6px;
+		padding: 0.5rem 1rem;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		font-family: inherit;
+		cursor: pointer;
+		transition: background 0.15s;
+		white-space: nowrap;
+		min-width: 4.75rem;
+	}
+	.ign-btn:hover:not(:disabled) {
+		background: color-mix(in srgb, var(--color-accent) 28%, transparent);
+	}
+	.ign-btn:disabled {
+		opacity: 0.5;
+		cursor: default;
+	}
+	.eligibility-divider {
+		width: 1px;
+		align-self: stretch;
+		background: var(--color-border);
+	}
+	.eligibility-right {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		padding: 1.25rem;
+		padding-right: 0;
+		min-height: 110px;
+		text-align: center;
+	}
+	.eligibility-idle {
+		font-size: 1.5rem;
+		color: var(--color-text-disabled);
+	}
+	.eligibility-verdict {
+		margin: 0;
+		font-size: 1.25rem;
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+	}
+	.eligibility-verdict--yes {
+		color: #2dd4a0;
+	}
+	.eligibility-verdict--no {
+		color: #ff5c6c;
+	}
+	.eligibility-verdict--error {
+		font-size: 0.9rem;
+		font-weight: 400;
+		color: var(--color-text-disabled);
+	}
+	.eligibility-ff {
+		font-size: 0.75rem;
+		color: var(--color-text-disabled);
+		letter-spacing: 0.04em;
+	}
+	@media (max-width: 640px) {
+		.eligibility-panel {
+			grid-template-columns: 1fr;
+		}
+		.eligibility-divider {
+			width: auto;
+			height: 1px;
+			align-self: auto;
+		}
+	}
+
+	.prize-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.prize-row {
+		display: grid;
+		grid-template-columns: 3rem 1fr 1fr auto;
+		align-items: center;
+		gap: 1rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
+		padding: 0.75rem 1.25rem;
+		transition: border-color 0.15s;
+	}
+	.prize-row--1 {
+		border-left: 3px solid #f5a623;
+	}
+	.prize-row--2 {
+		border-left: 3px solid #a0a0b0;
+	}
+	.prize-row--3 {
+		border-left: 3px solid #cd7f32;
+	}
+	.prize-row--4 {
+		border-left: 3px solid var(--color-border);
+	}
+	.prize-row--raffle {
+		border-left: 3px solid var(--color-border);
+		opacity: 0.7;
+	}
+	.prize-place {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-text-disabled);
+	}
+	.prize-row--1 .prize-place {
+		color: #f5a623;
+	}
+	.prize-row--2 .prize-place {
+		color: #a0a0b0;
+	}
+	.prize-row--3 .prize-place {
+		color: #cd7f32;
+	}
+	.prize-place--raffle {
+		letter-spacing: 0.04em;
+	}
+	.prize-player {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		text-decoration: none;
+	}
+	.prize-player--plain {
+		cursor: default;
+	}
+	.prize-avatar {
+		width: 28px;
+		height: 28px;
+		image-rendering: pixelated;
+		flex-shrink: 0;
+	}
+	.prize-name {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-text);
+	}
+	.prize-player:not(.prize-player--plain):hover .prize-name {
+		color: var(--color-accent);
+	}
+	.prize-name--muted {
+		color: var(--color-text-muted);
+		font-weight: 400;
+	}
+	.prize-pick {
+		display: inline;
+		width: 1.6em;
+		height: 1.6em;
+		vertical-align: middle;
+		image-rendering: pixelated;
+	}
+	.prize-desc {
+		font-size: 0.8rem;
+		color: var(--color-text-muted);
+	}
+	.prize-value {
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--color-text-disabled);
+		font-variant-numeric: tabular-nums;
+		text-align: right;
+	}
+	@media (max-width: 600px) {
+		.prize-row {
+			grid-template-columns: 3rem 1fr auto;
+		}
+		.prize-desc {
+			display: none;
+		}
+	}
+
+	.requirements {
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+		padding: 0 0.25rem;
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+	}
+	.requirements-label {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-text-disabled);
+		white-space: nowrap;
+		flex-shrink: 0;
 	}
 
 	.info-grid {
@@ -631,7 +1077,7 @@
 	.credits-groups {
 		display: flex;
 		flex-direction: column;
-		gap: 3.5rem;
+		gap: 3rem;
 		align-items: center;
 	}
 	.credits-group {
@@ -708,6 +1154,7 @@
 		gap: 0.6rem;
 		width: auto;
 		min-width: 72px;
+		position: relative;
 	}
 	.avatar {
 		width: 72px;
@@ -737,6 +1184,14 @@
 		color: var(--color-text-disabled);
 		text-align: center;
 		line-height: 1.2;
+	}
+	.credits-cloud .credit-note {
+		position: absolute;
+		top: 105%;
+		left: 50%;
+		transform: translateX(-50%);
+		white-space: nowrap;
+		pointer-events: none;
 	}
 
 	.final-card {
