@@ -6,6 +6,26 @@
 	let { children } = $props();
 
 	const title = "no%" + (dev ? ' [dev]' : '');
+
+	let fiveCount = 0;
+	let lastFiveTime = 0;
+
+	function handleKeydown(e: KeyboardEvent) {
+		const now = Date.now();
+		if (e.key === '5') {
+			if (fiveCount === 1 && now - lastFiveTime < 600) {
+				fiveCount = 2;
+			} else {
+				fiveCount = 1;
+			}
+			lastFiveTime = now;
+		} else if (e.key === 'Enter' && fiveCount === 2) {
+			window.location.href = '/55.gif';
+			fiveCount = 0;
+		} else {
+			fiveCount = 0;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -22,6 +42,8 @@
 	<link rel="dns-prefetch" href="https://ilovecatgirls.xyz/" />
 	<link rel="dns-prefetch" href="https://nmsr.nickac.dev/" />
 </svelte:head>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <div id="root">
 	{@render children()}
