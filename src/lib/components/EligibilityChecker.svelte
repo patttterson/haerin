@@ -32,7 +32,7 @@
 	}
 </script>
 
-<div class="eligibility-panel">
+<div class="eligibility-panel -mb-2!">
 	<div class="eligibility-left">
 		<p class="eligibility-sign">check<br />eligibility</p>
 		<form class="eligibility-form" on:submit|preventDefault={checkEligibility}>
@@ -81,13 +81,13 @@
 		{/if}
 	</div>
 </div>
+<div class="eligibility-hr"></div>
 
 <style>
 	.eligibility-panel {
 		display: grid;
 		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
-		margin-bottom: 0.75rem;
 		overflow: hidden;
 	}
 	.eligibility-left {
@@ -190,6 +190,11 @@
 		font-size: 0.75rem;
 		color: var(--color-text-disabled);
 		letter-spacing: 0.04em;
+	}
+	.eligibility-hr {
+		height: 1px;
+		background: var(--color-border);
+		margin-bottom: 0.75rem;
 	}
 	@media (max-width: 640px) {
 		.eligibility-panel {
