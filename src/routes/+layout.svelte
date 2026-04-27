@@ -1,0 +1,66 @@
+<script lang="ts">
+	import './layout.css';
+	import './fonts.css';
+	import { dev } from '$app/environment';
+
+	let { children } = $props();
+
+	const title = "no%" + (dev ? ' [dev]' : '');
+</script>
+
+<svelte:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>{title}</title>
+	<meta name="description" property="og:description" content="The official website of no% invitational, the scuffed tournament hosted by patty" />
+	<meta name="theme-color" content="#f72585" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+	<link rel="manifest" href="/site.webmanifest" />
+
+	<link rel="dns-prefetch" href="https://ilovecatgirls.xyz/" />
+	<link rel="dns-prefetch" href="https://nmsr.nickac.dev/" />
+</svelte:head>
+
+<div id="root">
+	{@render children()}
+</div>
+
+<style>
+	:global(body) {
+		--bg-overlay-rgb: 0, 0, 0;
+		--bg-dim: 0.6;
+		font-family: 'Comfortaa', system-ui, sans-serif;
+		background-color: var(--color-bg);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		color: var(--color-text);
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		min-height: 100vh;
+		margin: 0;
+	}
+
+	:global(body)::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		background: rgba(var(--bg-overlay-rgb), var(--bg-dim));
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	:global(::selection),
+	:global(::-moz-selection) {
+		background: var(--color-accent);
+	}
+
+	#root {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+</style>
