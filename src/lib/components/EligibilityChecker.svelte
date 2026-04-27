@@ -149,7 +149,8 @@
 	}
 	.eligibility-divider {
 		width: 1px;
-		align-self: stretch;
+		align-self: center;
+		height: 80%;
 		background: var(--color-border);
 	}
 	.eligibility-right {
