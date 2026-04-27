@@ -395,6 +395,7 @@
 	}
 	.section-top {
 		border-top: 0;
+		scroll-margin-top: 5rem;
 	}
 	.section-title {
 		font-size: 0.75rem;

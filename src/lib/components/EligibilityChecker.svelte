@@ -73,9 +73,11 @@
 				<p class="eligibility-verdict eligibility-verdict--yes">you're eligible!</p>
 			{/if}
 			<span class="eligibility-ff">{seasonalFf?.toFixed(2)}% ff rate this season</span>
+			<p class="eligibility-note">(you qualify)</p>
 		{:else if eligibilityState === 'ineligible'}
 			<p class="eligibility-verdict eligibility-verdict--no">not eligible for NPI.</p>
 			<span class="eligibility-ff">{seasonalFf?.toFixed(2)}% ff rate this season</span>
+			<p class="eligibility-note">do better next season &hearts;</p>
 		{:else if eligibilityState === 'error'}
 			<p class="eligibility-verdict eligibility-verdict--error">{eligibilityMessage}</p>
 		{/if}
