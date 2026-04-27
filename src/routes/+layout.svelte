@@ -34,7 +34,7 @@
 	<meta
 		name="description"
 		property="og:description"
-		content="The official website of no% invitational, the scuffed tournament hosted by patty"
+		content="a community tournament for runners who hate percentages"
 	/>
 	<meta name="theme-color" content="#f72585" />
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />

@@ -75,7 +75,7 @@
 		</section>
 
 		<section class="section section-top pt-0!" id="info">
-			<h2 class="section-title">info</h2>
+			<h2 class="section-title mb-0!">info</h2>
 			<EligibilityChecker />
 			<div class="info-grid">
 				<div class="info-card">
@@ -171,7 +171,7 @@
 		<section class="section" id="prize-pool">
 			<h2 class="section-title">prize pool</h2>
 			<div class="prize-list">
-				{#each prizes as entry}
+				{#each prizes as entry (entry.uuid)}
 					<div
 						class="prize-row prize-row--{entry.place
 							.replace('th', '')
@@ -486,6 +486,7 @@
 		display: inline;
 		width: 1.6em;
 		height: 1.6em;
+		margin-left: 0.2em;
 		vertical-align: middle;
 		image-rendering: pixelated;
 	}

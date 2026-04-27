@@ -48,6 +48,11 @@
 				{eligibilityState === 'loading' ? '...' : 'check'}
 			</button>
 		</form>
+
+		<div class="requirements">
+			<span class="requirements-label">requirement</span>
+			less than 15% forfeit rate in the current season
+		</div>
 	</div>
 	<div class="eligibility-divider"></div>
 	<div class="eligibility-right">
@@ -75,10 +80,6 @@
 			<p class="eligibility-verdict eligibility-verdict--error">{eligibilityMessage}</p>
 		{/if}
 	</div>
-</div>
-<div class="requirements">
-	<span class="requirements-label">requirement</span>
-	less than 15% forfeit rate in the current season
 </div>
 
 <style>
@@ -204,7 +205,6 @@
 		display: flex;
 		align-items: baseline;
 		gap: 0.75rem;
-		margin-bottom: 0.75rem;
 		padding: 0 0.25rem;
 		font-size: 0.85rem;
 		color: var(--color-text-muted);
