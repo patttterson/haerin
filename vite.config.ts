@@ -7,5 +7,5 @@ const commitHash = execSync('git rev-parse --short HEAD').toString().trim();
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
-	define: { __COMMIT_HASH__: JSON.stringify(commitHash) },
+	define: { __COMMIT_HASH__: JSON.stringify(commitHash) }
 });

@@ -5,7 +5,7 @@
 
 	let { children } = $props();
 
-	const title = "no%" + (dev ? ' [dev]' : '');
+	const title = 'no%' + (dev ? ' [dev]' : '');
 
 	let fiveCount = 0;
 	let lastFiveTime = 0;
@@ -31,7 +31,11 @@
 <svelte:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>{title}</title>
-	<meta name="description" property="og:description" content="The official website of no% invitational, the scuffed tournament hosted by patty" />
+	<meta
+		name="description"
+		property="og:description"
+		content="The official website of no% invitational, the scuffed tournament hosted by patty"
+	/>
 	<meta name="theme-color" content="#f72585" />
 	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
