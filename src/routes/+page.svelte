@@ -58,7 +58,7 @@
 	<main>
 		<section class="hero">
 			<div class="hero-title">
-				<h1>no<span class="pct">%</span><br />invitational</h1>
+				<h1>no<span class="pct">%</span><br /><span class="highlight" data-text="invitational">invitational</span></h1>
 				<p class="tagline">a community tournament for runners who hate percentages</p>
 				<div class="hero-badges">
 					<span class="badge muted">#1 Concluded</span>
@@ -323,6 +323,39 @@
 	}
 	.pct {
 		color: var(--color-accent);
+	}
+	.highlight {
+		position: relative;
+		display: inline-block;
+		color: var(--color-text);
+		animation: highlight-color 0s 1s forwards;
+	}
+	@keyframes highlight-color {
+		to { color: var(--color-bg); }
+	}
+	.highlight::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--color-accent);
+		z-index: -1;
+		clip-path: inset(0 100% 0 0);
+		animation: highlight-sweep 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+	}
+	.highlight::after {
+		content: attr(data-text);
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: var(--color-bg);
+		clip-path: inset(0 100% 0 0);
+		animation: highlight-sweep 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		pointer-events: none;
+	}
+	@keyframes highlight-sweep {
+		to {
+			clip-path: inset(0 0.6% 0 0);
+		}
 	}
 	nav {
 		display: flex;
