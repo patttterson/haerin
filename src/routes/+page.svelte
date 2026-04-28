@@ -106,14 +106,13 @@
 			</div>
 		</section>
 
-		<div class="npi1-divider">
+		<div class="npi1-divider" id="npi1">
 			<div class="npi1-divider-line"></div>
 			<span class="npi1-divider-label">no<span class="pct">%</span> invitational 1</span>
 			<div class="npi1-divider-line"></div>
 		</div>
 
 		<section class="section section-top" id="winners">
-			<h2 class="section-title" style="text-align: center">results</h2>
 			<div class="final-card">
 				<div class="final-player final-player--winner">
 					<img
@@ -128,6 +127,9 @@
 							href="https://mcsrranked.com/stats/2125698b-0d79-4c4c-9969-8e39430e65fc"
 							target="_blank"
 							rel="external noopener">junesies</a
+						>
+						<span class="final-quote"
+							>"george bush doesn't care about black people" &mdash; junesies</span
 						>
 					</div>
 				</div>
@@ -684,6 +686,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 0.2rem;
+		position: relative;
 	}
 	.final-crown {
 		font-size: 0.65rem;
@@ -707,6 +710,18 @@
 	}
 	.final-name--muted {
 		color: var(--color-text-muted);
+	}
+	.final-quote {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		margin-top: 0.35rem;
+		font-size: 0.7rem;
+		color: var(--color-text-disabled);
+		font-style: italic;
+		text-align: center;
+		white-space: nowrap;
 	}
 	.final-score {
 		display: flex;

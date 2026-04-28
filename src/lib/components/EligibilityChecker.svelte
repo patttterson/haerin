@@ -3,9 +3,8 @@
 
 	import mendingHeart from '$lib/assets/mending-heart.png';
 	import wiltedRose from '$lib/assets/wilted-rose.png';
-	import { redirect } from '@sveltejs/kit';
 
-	let ignInput = page.url.searchParams.get('ign') ?? '';;
+	let ignInput = page.url.searchParams.get('ign') ?? '';
 	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
 	let eligibilityMessage = '';
 	let seasonalFf: number | null = null;
@@ -76,12 +75,16 @@
 			<span class="eligibility-idle">←</span>
 		{:else if eligibilityState === 'loading'}
 			<span class="eligibility-idle">...</span>
-		{:else if queriedUUID === '652a4e7f163d41d58faecb47f59fb12c' /* patty */}
-			<p class="eligibility-verdict eligibility-verdict--yes">hell yeah twin <img src={mendingHeart} alt="🩹" class="inline-emoji" /></p>
+		{:else if queriedUUID === '652a4e7f163d41d58faecb47f59fb12c'}
+			<p class="eligibility-verdict eligibility-verdict--yes">
+				hell yeah twin <img src={mendingHeart} alt="🩹" class="inline-emoji" />
+			</p>
 			<span class="eligibility-ff">-55% ff rate this season</span>
 			<span class="eligibility-note">i dont make the rules (i do)</span>
 		{:else if bannedUsers[queriedUUID]}
-			<p class="eligibility-verdict eligibility-verdict--no">hell NAH twin <img src={wiltedRose} alt="🥀" class="inline-emoji" /></p>
+			<p class="eligibility-verdict eligibility-verdict--no">
+				hell NAH twin <img src={wiltedRose} alt="🥀" class="inline-emoji" />
+			</p>
 			<span class="eligibility-ff">100% ff rate this season</span>
 			<span class="eligibility-note">{bannedUsers[queriedUUID]}</span>
 		{:else if eligibilityState === 'eligible'}
