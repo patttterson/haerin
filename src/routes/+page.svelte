@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import diaPick from '$lib/assets/dia_pick.png';
+	import pick3 from '$lib/assets/dia-pick.png';
 	import EligibilityChecker from '$lib/components/EligibilityChecker.svelte';
 	import GroupStageVods from '$lib/components/GroupStageVods.svelte';
 	import Credits from '$lib/components/Credits.svelte';
@@ -202,7 +202,7 @@
 						<span class="prize-desc">
 							{entry.desc}{#if entry.soup}&nbsp;<img
 									class="prize-pick"
-									src={diaPick}
+									src={pick3}
 									alt="Diamond Pickaxe supporter"
 								/>{/if}
 						</span>
@@ -229,7 +229,7 @@
 					<span class="prize-desc"
 						>1 month&nbsp;<img
 							class="prize-pick"
-							src={diaPick}
+							src={pick3}
 							alt="Diamond Pickaxe supporter"
 						/></span
 					>

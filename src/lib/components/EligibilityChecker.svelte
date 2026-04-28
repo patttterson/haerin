@@ -1,9 +1,11 @@
 <script lang="ts">
 	import mendingHeart from '$lib/assets/mending-heart.png';
+	import wiltedRose from '$lib/assets/wilted-rose.png';
 	let ignInput = '';
 	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
 	let eligibilityMessage = '';
 	let seasonalFf: number | null = null;
+	let queriedUUID = '';
 
 	async function checkEligibility() {
 		const ign = ignInput.trim();
@@ -18,6 +20,7 @@
 				return;
 			}
 			const data = await resp.json();
+			queriedUUID = data.data.uuid;
 			const stats = data.data.statistics;
 			const ff = (stats.season.forfeits.ranked / stats.season.playedMatches.ranked) * 100;
 			seasonalFf = ff;
@@ -31,6 +34,11 @@
 			eligibilityMessage = 'something went wrong, try again';
 		}
 	}
+
+	const bannedUsers: Record<string, string> = {
+		'22efa8027c894657a9fead525f01c630': 'no colluding dumbass',
+		'4d93a367a51a461fa01fe62ff7ed4cb2': 'i feel kinda bad but i gotta set an example'
+	};
 </script>
 
 <div class="eligibility-panel -mt-1! -mb-2!" class:is-idle={eligibilityState === 'idle'}>
@@ -61,10 +69,14 @@
 			<span class="eligibility-idle">←</span>
 		{:else if eligibilityState === 'loading'}
 			<span class="eligibility-idle">...</span>
-		{:else if ignInput.toLowerCase() === 'submissivecatgir'}
+		{:else if queriedUUID === '652a4e7f163d41d58faecb47f59fb12c' /* patty */}
 			<p class="eligibility-verdict eligibility-verdict--yes">hell yeah twin <img src={mendingHeart} alt="🩹" class="inline-emoji" /></p>
 			<span class="eligibility-ff">-55% ff rate this season</span>
 			<span class="eligibility-note">i dont make the rules (i do)</span>
+		{:else if bannedUsers[queriedUUID]}
+			<p class="eligibility-verdict eligibility-verdict--no">hell NAH twin <img src={wiltedRose} alt="🥀" class="inline-emoji" /></p>
+			<span class="eligibility-ff">100% ff rate this season</span>
+			<span class="eligibility-note">{bannedUsers[queriedUUID]}</span>
 		{:else if eligibilityState === 'eligible'}
 			{#if seasonalFf === 0}
 				<p class="eligibility-verdict eligibility-verdict--yes eligibility-verdict--top">
