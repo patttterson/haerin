@@ -1,4 +1,5 @@
 <script lang="ts">
+	import mendingHeart from '$lib/assets/mending-heart.png';
 	let ignInput = '';
 	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
 	let eligibilityMessage = '';
@@ -57,13 +58,13 @@
 	<div class="eligibility-divider"></div>
 	<div class="eligibility-right">
 		{#if eligibilityState === 'idle'}
-			<span class="eligibility-idle">—</span>
+			<span class="eligibility-idle">←</span>
 		{:else if eligibilityState === 'loading'}
 			<span class="eligibility-idle">...</span>
 		{:else if ignInput.toLowerCase() === 'submissivecatgir'}
-			<p class="eligibility-verdict eligibility-verdict--yes">for sure twin</p>
+			<p class="eligibility-verdict eligibility-verdict--yes">hell yeah twin <img src={mendingHeart} alt="🩹" class="inline-emoji" /></p>
 			<span class="eligibility-ff">-55% ff rate this season</span>
-			<span class="eligibility-note">what did you think was gonna happen?</span>
+			<span class="eligibility-note">i dont make the rules (i do)</span>
 		{:else if eligibilityState === 'eligible'}
 			{#if seasonalFf === 0}
 				<p class="eligibility-verdict eligibility-verdict--yes eligibility-verdict--top">
@@ -182,6 +183,12 @@
 	.eligibility-verdict--yes {
 		color: #2dd4a0;
 	}
+	.inline-emoji {
+		display: inline;
+		width: 1.2em;
+		height: 1.2em;
+		vertical-align: -0.2em;
+	}
 	.eligibility-verdict--no {
 		color: #ff5c6c;
 	}
@@ -219,7 +226,6 @@
 		display: flex;
 		align-items: baseline;
 		gap: 0.75rem;
-		padding: 0 0.25rem;
 		font-size: 0.85rem;
 		color: var(--color-text-muted);
 	}

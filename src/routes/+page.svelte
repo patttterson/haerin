@@ -102,7 +102,7 @@
 				</div>
 			</div>
 			<div class="description-card">
-				<p>THIS SHIT NOT HAPPENING TILL LIKE LATE SUMMER 2026 I GOT TESTS DAWG</p>
+				<p>Late Summer 2026 MAYBE</p>
 			</div>
 		</section>
 
