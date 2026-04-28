@@ -34,7 +34,7 @@
 
 <div class="eligibility-panel -mt-1! -mb-2!" class:is-idle={eligibilityState === 'idle'}>
 	<div class="eligibility-left">
-		<p class="eligibility-sign">check<br />eligibility</p>
+		<p class="eligibility-sign">check eligibility</p>
 		<form class="eligibility-form" on:submit|preventDefault={checkEligibility}>
 			<input
 				class="ign-input"
