@@ -32,7 +32,7 @@
 	}
 </script>
 
-<div class="eligibility-panel -mt-1! -mb-2!">
+<div class="eligibility-panel -mt-1! -mb-2!" class:is-idle={eligibilityState === 'idle'}>
 	<div class="eligibility-left">
 		<p class="eligibility-sign">check<br />eligibility</p>
 		<form class="eligibility-form" on:submit|preventDefault={checkEligibility}>
@@ -163,7 +163,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.35rem;
-		padding: 1.25rem;
+		padding: 1.25rem 0;
 		padding-right: 0;
 		min-height: 110px;
 		text-align: center;
@@ -208,6 +208,10 @@
 			width: auto;
 			height: 1px;
 			align-self: auto;
+		}
+		.eligibility-panel.is-idle .eligibility-divider,
+		.eligibility-panel.is-idle .eligibility-right {
+			display: none;
 		}
 	}
 

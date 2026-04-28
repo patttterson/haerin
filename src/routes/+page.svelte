@@ -310,6 +310,7 @@
 		text-transform: uppercase;
 		color: var(--color-bg);
 		justify-self: center;
+		text-align: center;
 		margin: 0;
 	}
 
@@ -347,7 +348,6 @@
 	@media (max-width: 640px) {
 		.hero {
 			grid-template-columns: 1fr;
-			padding: 3rem 0 2rem;
 		}
 	}
 	h1 {
@@ -550,6 +550,11 @@
 		grid-template-columns: repeat(4, 1fr);
 		gap: 0.75rem;
 		margin-bottom: 1rem;
+	}
+	@media (max-width: 600px) {
+		.info-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 	.info-card {
 		background: var(--color-surface);
@@ -765,5 +770,20 @@
 	}
 	.footer-gh:hover {
 		color: var(--color-accent);
+	}
+	@media (max-width: 480px) {
+		footer {
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+			text-align: center;
+		}
+		footer > span:first-child {
+			flex: none;
+		}
+		.footer-gh-wrap {
+			flex: none;
+			justify-content: center;
+		}
 	}
 </style>
