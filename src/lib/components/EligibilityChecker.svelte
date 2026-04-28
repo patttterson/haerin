@@ -32,7 +32,7 @@
 	}
 </script>
 
-<div class="eligibility-panel -mb-2!">
+<div class="eligibility-panel -mt-1! -mb-2!">
 	<div class="eligibility-left">
 		<p class="eligibility-sign">check<br />eligibility</p>
 		<form class="eligibility-form" on:submit|preventDefault={checkEligibility}>

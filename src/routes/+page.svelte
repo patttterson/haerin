@@ -74,7 +74,7 @@
 			</div>
 		</section>
 
-		<section class="section section-top pt-0!" id="info">
+		<section class="section pt-0!" id="info">
 			<EligibilityChecker />
 			<div class="info-grid">
 				<div class="info-card">
@@ -366,7 +366,7 @@
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		padding: 2rem 1.5rem 0;
+		padding: 0 1.5rem;
 		width: 100vw;
 		margin-left: calc(50% - 50vw);
 	}
