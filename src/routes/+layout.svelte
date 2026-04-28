@@ -55,8 +55,6 @@
 
 <style>
 	:global(body) {
-		--bg-overlay-rgb: 0, 0, 0;
-		--bg-dim: 0.6;
 		font-family: 'Comfortaa', system-ui, sans-serif;
 		background-color: var(--color-bg);
 		background-size: cover;

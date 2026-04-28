@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { page } from '$app/state';
+
 	import mendingHeart from '$lib/assets/mending-heart.png';
 	import wiltedRose from '$lib/assets/wilted-rose.png';
-	let ignInput = '';
+	import { redirect } from '@sveltejs/kit';
+
+	let ignInput = page.url.searchParams.get('ign') ?? '';;
 	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
 	let eligibilityMessage = '';
 	let seasonalFf: number | null = null;
 	let queriedUUID = '';
+	const bannedUsers: Record<string, string> = {
+		'22efa8027c894657a9fead525f01c630': 'no colluding dumbass',
+		'4d93a367a51a461fa01fe62ff7ed4cb2': 'i feel kinda bad but i gotta set an example'
+	};
 
 	async function checkEligibility() {
 		const ign = ignInput.trim();
@@ -35,10 +43,9 @@
 		}
 	}
 
-	const bannedUsers: Record<string, string> = {
-		'22efa8027c894657a9fead525f01c630': 'no colluding dumbass',
-		'4d93a367a51a461fa01fe62ff7ed4cb2': 'i feel kinda bad but i gotta set an example'
-	};
+	if (ignInput) {
+		checkEligibility();
+	}
 </script>
 
 <div class="eligibility-panel -mt-1! -mb-2!" class:is-idle={eligibilityState === 'idle'}>

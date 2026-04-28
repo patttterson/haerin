@@ -24,3 +24,31 @@
 
 	--color-overlay: rgba(0, 0, 0, 0.45);
 }
+
+html[data-theme='light'] {
+	--color-bg: #f7f6fc;
+	--color-surface: #ffffff;
+	--color-surface-2: #edeaf8;
+	--color-border: #d8d4ee;
+
+	--color-text: #1c1a2e;
+	--color-text-muted: #5e5880;
+	--color-text-disabled: #9e99b8;
+
+	--color-accent: #c40060;
+	--color-accent-hover: #e8006f;
+	--color-accent-muted: #fce4f0;
+
+	--color-success: #17a775;
+	--color-warning: #b07000;
+	--color-error: #d42f45;
+
+	--color-rank-gold: #f49b00;
+	--color-rank-silver: #90909d;
+	--color-rank-bronze: #ca6f20;
+
+	--color-overlay: rgba(0, 0, 0, 0.25);
+
+	--bg-overlay-rgb: 255, 255, 255;
+	--bg-dim: 0.3;
+}
