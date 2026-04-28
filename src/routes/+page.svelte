@@ -58,7 +58,11 @@
 	<main>
 		<section class="hero">
 			<div class="hero-title">
-				<h1>no<span class="pct">%</span><br /><span class="highlight" data-text="invitational">invitational</span></h1>
+				<h1>
+					no<span class="pct">%</span><br /><span class="highlight" data-text="invitational"
+						>invitational</span
+					>
+				</h1>
 				<p class="tagline">a community tournament for runners who hate percentages</p>
 				<div class="hero-badges">
 					<span class="badge muted">#1 Concluded</span>
@@ -207,9 +211,21 @@
 				{/each}
 				<div class="prize-row prize-row--raffle">
 					<span class="prize-place prize-place--raffle">raffle</span>
-					<div class="prize-player prize-player--plain">
-						<span class="prize-name prize-name--muted">TBD</span>
-					</div>
+					<a
+						class="prize-player"
+						href="https://mcsrranked.com/stats/7a9eab13-3401-4126-9d5a-9a2732a00c79"
+						target="_blank"
+						rel="external noopener"
+					>
+						<img
+							class="prize-avatar"
+							src="https://nmsr.nickac.dev/face/7a9eab13-3401-4126-9d5a-9a2732a00c79"
+							alt="Silviore"
+						/>
+						<div class="prize-player prize-player--plain">
+							<span class="prize-name">Silviore</span>
+						</div>
+					</a>
 					<span class="prize-desc"
 						>1 month&nbsp;<img
 							class="prize-pick"
@@ -331,7 +347,9 @@
 		animation: highlight-color 0s 1s forwards;
 	}
 	@keyframes highlight-color {
-		to { color: var(--color-bg); }
+		to {
+			color: var(--color-bg);
+		}
 	}
 	.highlight::before {
 		content: '';
