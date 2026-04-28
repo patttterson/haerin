@@ -41,9 +41,12 @@
 	];
 </script>
 
-<header class="site-header">
+<header class="site-header" class:dev>
 	<div class="site-header__inner">
 		<a class="logo" href="#top">no<span class="pct">%</span> invitational</a>
+		{#if dev}
+			<p class="dev-label">DEV BUILD</p>
+		{/if}
 		<nav>
 			<a href="#info">info</a>
 			<a href="#vods">vods</a>
@@ -271,13 +274,45 @@
 		z-index: 10;
 	}
 	.site-header__inner {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
-		justify-content: space-between;
 		max-width: 1100px;
 		margin: 0 auto;
 		padding: 1.25rem 1.5rem;
 	}
+	.site-header__inner nav {
+		justify-self: end;
+		grid-column: 3;
+	}
+
+	.site-header.dev {
+		background: var(--color-text);
+		border-bottom-color: var(--color-text);
+	}
+	.site-header.dev .logo {
+		color: var(--color-bg);
+	}
+	.site-header.dev .pct {
+		color: var(--color-accent);
+	}
+	.site-header.dev nav a {
+		color: color-mix(in srgb, var(--color-bg) 60%, transparent);
+	}
+	.site-header.dev nav a:hover {
+		color: var(--color-bg);
+	}
+	.dev-label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		font-family: monospace;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-bg);
+		justify-self: center;
+		margin: 0;
+	}
+
 	.logo {
 		font-size: 1.1rem;
 		font-weight: 700;
