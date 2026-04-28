@@ -91,7 +91,7 @@
 		content: '';
 		position: absolute;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.45);
+		background: var(--color-overlay);
 		border-radius: 6px;
 		backdrop-filter: blur(2px);
 	}

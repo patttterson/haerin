@@ -17,4 +17,10 @@
 	--color-success: #2dd4a0;
 	--color-warning: #f5a623;
 	--color-error: #ff5c6c;
+
+	--color-rank-gold: #f5a623;
+	--color-rank-silver: #a0a0b0;
+	--color-rank-bronze: #cd7f32;
+
+	--color-overlay: rgba(0, 0, 0, 0.45);
 }

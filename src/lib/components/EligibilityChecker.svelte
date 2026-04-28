@@ -193,7 +193,7 @@
 		line-height: 1.2;
 	}
 	.eligibility-verdict--yes {
-		color: #2dd4a0;
+		color: var(--color-success);
 	}
 	.inline-emoji {
 		display: inline;
@@ -202,7 +202,7 @@
 		vertical-align: -0.2em;
 	}
 	.eligibility-verdict--no {
-		color: #ff5c6c;
+		color: var(--color-error);
 	}
 	.eligibility-verdict--error {
 		font-size: 0.9rem;

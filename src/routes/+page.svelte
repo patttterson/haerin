@@ -507,13 +507,13 @@
 		transition: border-color 0.15s;
 	}
 	.prize-row--1 {
-		border-left: 3px solid #f5a623;
+		border-left: 3px solid var(--color-rank-gold);
 	}
 	.prize-row--2 {
-		border-left: 3px solid #a0a0b0;
+		border-left: 3px solid var(--color-rank-silver);
 	}
 	.prize-row--3 {
-		border-left: 3px solid #cd7f32;
+		border-left: 3px solid var(--color-rank-bronze);
 	}
 	.prize-row--4 {
 		border-left: 3px solid var(--color-border);
@@ -530,13 +530,13 @@
 		color: var(--color-text-disabled);
 	}
 	.prize-row--1 .prize-place {
-		color: #f5a623;
+		color: var(--color-rank-gold);
 	}
 	.prize-row--2 .prize-place {
-		color: #a0a0b0;
+		color: var(--color-rank-silver);
 	}
 	.prize-row--3 .prize-place {
-		color: #cd7f32;
+		color: var(--color-rank-bronze);
 	}
 	.prize-place--raffle {
 		letter-spacing: 0.04em;
@@ -689,7 +689,7 @@
 		font-size: 0.65rem;
 		text-transform: uppercase;
 		letter-spacing: 0.14em;
-		color: #f5a623;
+		color: var(--color-rank-gold);
 		font-weight: 700;
 	}
 	.final-crown--hidden {
@@ -725,7 +725,7 @@
 		text-align: center;
 	}
 	.final-score-win {
-		color: #f5a623;
+		color: var(--color-rank-gold);
 	}
 	.final-stats {
 		display: flex;

@@ -82,7 +82,7 @@
 	:global(::selection),
 	:global(::-moz-selection) {
 		background: var(--color-accent);
-		color: black;
+		color: var(--color-bg);
 	}
 
 	#root {
