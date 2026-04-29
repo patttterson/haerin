@@ -3,6 +3,7 @@
 
 	import mendingHeart from '$lib/assets/mending-heart.png';
 	import wiltedRose from '$lib/assets/wilted-rose.png';
+	import { onMount } from 'svelte';
 
 	let ignInput = page.url.searchParams.get('ign') ?? '';
 	let eligibilityState: 'idle' | 'loading' | 'eligible' | 'ineligible' | 'error' = 'idle';
@@ -42,9 +43,11 @@
 		}
 	}
 
-	if (ignInput) {
-		checkEligibility();
-	}
+	onMount(() => {
+		if (ignInput) {
+			checkEligibility();
+		}
+	});
 </script>
 
 <div class="eligibility-panel -mt-1! -mb-2!" class:is-idle={eligibilityState === 'idle'}>

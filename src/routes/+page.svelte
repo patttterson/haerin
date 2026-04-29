@@ -461,6 +461,7 @@
 	@media (max-width: 640px) {
 		.hero {
 			grid-template-columns: 1fr;
+			gap: 1.5rem;
 		}
 	}
 	h1 {
@@ -472,7 +473,7 @@
 	.tagline {
 		color: var(--color-text-muted);
 		font-size: 1rem;
-		margin: 0 0 1.25rem;
+		margin: 0 0 0.5rem;
 		line-height: 1.5;
 	}
 	.hero-badges {
