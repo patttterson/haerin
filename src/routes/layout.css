@@ -1,5 +1,14 @@
 @import 'tailwindcss';
 
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+	transition:
+		background-color 0.25s ease,
+		color 0.25s ease,
+		border-color 0.25s ease !important;
+}
+
 @theme {
 	--color-bg: #0f0f13;
 	--color-surface: #1a1a24;

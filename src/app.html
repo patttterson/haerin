@@ -6,7 +6,11 @@
 		<meta name="text-scale" content="scale" />
 		<script>
 			const p = new URLSearchParams(location.search);
-			if (p.get('test') === 'light') document.documentElement.dataset.theme = 'light';
+			const saved = localStorage.getItem('theme');
+			const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+			if (p.get('test') === 'light' || saved === 'light' || (!saved && !prefersDark)) {
+				document.documentElement.dataset.theme = 'light';
+			}
 		</script>
 		%sveltekit.head%
 	</head>
