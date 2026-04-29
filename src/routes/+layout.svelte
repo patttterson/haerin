@@ -57,24 +57,12 @@
 	:global(body) {
 		font-family: 'Comfortaa', system-ui, sans-serif;
 		background-color: var(--color-bg);
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
 		color: var(--color-text);
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
 		min-height: 100vh;
 		margin: 0;
-	}
-
-	:global(body)::before {
-		content: '';
-		position: fixed;
-		inset: 0;
-		background: rgba(var(--bg-overlay-rgb), var(--bg-dim));
-		pointer-events: none;
-		z-index: -1;
 	}
 
 	:global(::selection),

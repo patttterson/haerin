@@ -405,10 +405,13 @@
 	.highlight {
 		position: relative;
 		display: inline-block;
-		color: var(--color-text);
-		animation: highlight-color 0s 1s forwards;
+		color: var(--color-bg);
+		animation: highlight-color 0s 1.25s backwards;
 	}
 	@keyframes highlight-color {
+		from {
+			color: var(--color-bg);
+		}
 		to {
 			color: var(--color-bg);
 		}
@@ -420,7 +423,7 @@
 		background: var(--color-accent);
 		z-index: -1;
 		clip-path: inset(0 100% 0 0);
-		animation: highlight-sweep 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		animation: highlight-sweep 0.8s 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 	}
 	.highlight::after {
 		content: attr(data-text);
@@ -429,7 +432,7 @@
 		top: 0;
 		color: var(--color-bg);
 		clip-path: inset(0 100% 0 0);
-		animation: highlight-sweep 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+		animation: highlight-sweep 0.8s 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 		pointer-events: none;
 	}
 	@keyframes highlight-sweep {
