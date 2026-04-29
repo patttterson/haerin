@@ -3,7 +3,7 @@
 	import pick3 from '$lib/assets/dia-pick.png';
 
 	let theme = $state<'dark' | 'light'>(
-		browser && document.documentElement.dataset.theme === 'light' ? 'light' : 'dark'
+		browser && document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
 	);
 
 	function toggleTheme() {

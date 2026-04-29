@@ -8,8 +8,10 @@
 			const p = new URLSearchParams(location.search);
 			const saved = localStorage.getItem('theme');
 			const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
-			if (p.get('test') === 'light' || saved === 'light' || (!saved && !prefersDark)) {
+			if (p.get('test') === 'light' || saved === 'light') {
 				document.documentElement.dataset.theme = 'light';
+			} else {
+				document.documentElement.dataset.theme = 'dark';
 			}
 		</script>
 		%sveltekit.head%
