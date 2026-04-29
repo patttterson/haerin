@@ -123,7 +123,10 @@
 						>invitational</span
 					>
 				</h1>
-				<p class="tagline">a community tournament for runners who hate percentages</p>
+				<p class="tagline">
+					a tournament for runners who hate percentages<br />also not an invitational. i'll change
+					the name later :-&rpar;
+				</p>
 				<div class="hero-badges">
 					<span class="badge muted">#1 Concluded</span>
 					<span class="badge accent">#2 Coming Soon</span>
