@@ -21,6 +21,7 @@
 	import EligibilityChecker from '$lib/components/EligibilityChecker.svelte';
 	import GroupStageVods from '$lib/components/GroupStageVods.svelte';
 	import Credits from '$lib/components/Credits.svelte';
+	import { resolve } from '$app/paths';
 
 	const prizes = [
 		{
@@ -65,6 +66,7 @@
 			<p class="dev-label">DEV BUILD</p>
 		{/if}
 		<nav>
+			<a href={resolve('/mental')}>mental</a>
 			<a href="#info">info</a>
 			<a href="#vods">vods</a>
 			<button

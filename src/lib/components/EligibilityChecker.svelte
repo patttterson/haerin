@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 
 	import mendingHeart from '$lib/assets/mending-heart.png';
 	import wiltedRose from '$lib/assets/wilted-rose.png';
@@ -70,6 +71,7 @@
 		<div class="requirements">
 			<span class="requirements-label">requirement</span>
 			less than 15% forfeit rate in the current season
+			<a href={resolve('/mental')} class="requirements-link" target="_blank"><i>why?</i></a>
 		</div>
 	</div>
 	<div class="eligibility-divider"></div>
@@ -261,5 +263,12 @@
 		color: var(--color-text-disabled);
 		white-space: nowrap;
 		flex-shrink: 0;
+	}
+	.requirements-link {
+		font-size: 0.75rem;
+		color: var(--color-accent);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.15s;
 	}
 </style>
