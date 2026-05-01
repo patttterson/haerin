@@ -61,7 +61,7 @@
 
 <header class="site-header" class:dev>
 	<div class="site-header__inner">
-		<a class="logo" href="#top">no<span class="pct">%</span> invitational</a>
+		<a class="logo" href="#top">no<span class="pct">%</span> <span class="logo-full">invitational</span></a>
 		{#if dev}
 			<p class="dev-label">DEV BUILD</p>
 		{/if}
@@ -414,6 +414,16 @@
 		letter-spacing: -0.02em;
 		color: var(--color-text);
 		text-decoration: none;
+	}
+	@media (max-width: 660px) {
+		.dev-label {
+			display: none;
+		}
+	}
+	@media (max-width: 420px) {
+		.logo-full {
+			display: none;
+		}
 	}
 	.pct {
 		color: var(--color-accent);
