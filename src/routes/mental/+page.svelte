@@ -31,10 +31,10 @@
 				<div class="point-body">
 					<h2 class="point-title">your opponent can still lose</h2>
 					<p class="point-text">
-						No lead is safe in Ranked. Your opponent could miss the lava in PR, misplace obsidian on
-						the second portal, fail the zero, or even disconnect, and suddenly you're ahead. The
-						moment you forfeit, you hand them a win they haven't earned yet. You can come back from
-						a mistake, but you can't come back from a forfeit.
+						basically, ff = 100% loss, no ff = not 100% loss. your opponent could miss the lava in
+						PR, misplace obsidian on the second portal, fail the zero, or even disconnect, and
+						suddenly you win. you can come back from a mistake, but you can't come back from a
+						forfeit.
 					</p>
 				</div>
 			</div>
@@ -44,10 +44,9 @@
 				<div class="point-body">
 					<h2 class="point-title">it's unsportsmanlike</h2>
 					<p class="point-text">
-						Your opponent showed up to play a full match. Forfeiting before the run is clearly over
-						disrespects their time, their effort, and the game itself. On top of that, forfeiting
-						voids the run for them too. If they were on pace for a personal best, that time doesn't
-						count. You're not just giving up your own run, you're taking theirs.
+						forfeiting before the run is over disrespects their time, their effort, and the game
+						itself. not to mention, forfeiting voids the run for them too. if they were on pace for
+						a personal best, that time doesn't count.
 					</p>
 				</div>
 			</div>
@@ -57,11 +56,10 @@
 				<div class="point-body">
 					<h2 class="point-title">"it's necessary for my mental" just stop queuing</h2>
 					<p class="point-text">
-						If your mental is bad enough to forfeit, it's bad enough to log off. You can't use both
-						as an excuse at the same time. Most of the time "necessary for my mental" just means
-						wanting to skip to the next game, which isn't really a mental argument, it's just
-						impatience. Take a break if you need one, but forfeiting and immediately requeuing
-						doesn't actually help anything.
+						if your mental is bad enough to forfeit, it's bad enough to log off. most of the time
+						"necessary for my mental" just means wanting to skip to the next game, which isn't
+						really a mental argument, it's just impatience. take a break if you need one, but
+						forfeiting and immediately requeuing doesn't actually help anything.
 					</p>
 				</div>
 			</div>
