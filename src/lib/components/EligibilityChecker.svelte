@@ -32,6 +32,10 @@
 			queriedUUID = data.data.uuid;
 			const stats = data.data.statistics;
 			const ff = (stats.season.forfeits.ranked / stats.season.playedMatches.ranked) * 100;
+			if (!ff) {
+				eligibilityState = 'error';
+				eligibilityMessage = `${ign} hasn't played ranked this season.`;
+			}
 			seasonalFf = ff;
 			if (ff <= 15) {
 				eligibilityState = 'eligible';
